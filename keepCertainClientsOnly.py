@@ -3,7 +3,8 @@ from creatRemoveClientsTable import *
 kpClientID = []
 kpSubacctID = []
 
-kpClientID.append("104790450688")
+# the clientid and subacctid must inserted together, even if it is empty
+kpClientID.append("104790450688") 
 kpSubacctID.append("")
 
 
