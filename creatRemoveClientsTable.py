@@ -7,7 +7,6 @@ from random import randint
 
 db = MySQLdb.connect(host = host_,user = user_, passwd = password_, db = datebase_)
 cur = db.cursor()
-randSelect = False
 
 cur.execute("SELECT DISTINCT clientID, subacctid FROM clients")
 allClientData = cur.fetchall()[0:]
@@ -29,3 +28,5 @@ db.commit()
 rmClients = cur.fetchall()[0:]
 
 print(str(len(rmClients)) + " clients have been put in the TABLE algo_exclude_clients!!!")
+
+db.close()
