@@ -1,7 +1,8 @@
 import MySQLdb
 from hostInfo import *
-
+#####################INPUTS################################################
 percent = 0.6
+###########################################################################
 
 db = MySQLdb.connect(host = host_,user = user_, passwd = password_, db = datebase_)
 cur = db.cursor()
@@ -44,6 +45,7 @@ kpClients = cur.fetchall()[0:]
 print(str(len(kpClients)) + " important clients have been disabled in the TABLE algo_exclude_clients!!!")
 
 db.close()
+
 
                     
 

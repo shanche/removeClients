@@ -1,12 +1,13 @@
 import MySQLdb
 from hostInfo import *
 
-db = MySQLdb.connect(host = host_,user = user_, passwd = password_, db = datebase_)
-cur = db.cursor()
-
-
+#####################INPUTS################################################
 lowerLimit = 1000
 upperLimit = 100000
+###########################################################################
+
+db = MySQLdb.connect(host = host_,user = user_, passwd = password_, db = datebase_)
+cur = db.cursor()
 
 if (lowerLimit > upperLimit):
     print("Please check the range settings!!!")
@@ -28,7 +29,7 @@ for row in ClientToExclude:
         exSubacctID.append(row[3])
             
 for i in range(len(exClientID)):
-    cur.execute("UPDATE algo_exclude_clients SET effective = \'Y\', reason = \'Not in range\' WHERE clientID = \'" + exClientID[i] + "\'AND subacctID = \'" + exSubacctID[i] + "\'")
+    cur.execute("INSERT algo_exclude_clients (clientID, subacctID, effective, reason) VALUE (\'" + exClientID[i] + "\', \'" + exSubacctID[i] + "\', 'Y', \'Range\')")
     db.commit()
 
 cur.execute("SELECT * FROM algo_exclude_clients where effective = \'Y\'")

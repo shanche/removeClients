@@ -1,11 +1,15 @@
 
 import MySQLdb
-from hostInfo import *
+#from hostInfo_prod import *
+from hostInfo_yoda import *
+#####################INPUTS################################################
+upperLimit = 40
+###########################################################################
 
 db = MySQLdb.connect(host = host_,user = user_, passwd = password_, db = datebase_)
 cur = db.cursor()
 
-upperLimit = 1000
+
 
 exClientID = []
 exSubacctID = []
@@ -23,10 +27,10 @@ for row in ClientToExclude:
         exSubacctID.append(row[3])
             
 for i in range(len(exClientID)):
-    cur.execute("UPDATE algo_exclude_clients SET effective = \'Y\', reason = \'Small\' WHERE clientID = \'" + exClientID[i] + "\'AND subacctID = \'" + exSubacctID[i] + "\'")
+    cur.execute("INSERT algo_exclude_clients (clientID, subacctID, effective, reason) VALUE (\'" + exClientID[i] + "\', \'" + exSubacctID[i] + "\', 'Y', \'Small\')")
     db.commit()
 
-cur.execute("SELECT * FROM algo_exclude_clients where effective = \'Y\'")
+cur.execute("SELECT * FROM algo_exclude_clients where reason = \'Small\'")
 db.commit()
 rmClients = cur.fetchall()[0:]
 
