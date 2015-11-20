@@ -3,7 +3,7 @@ import MySQLdb
 #from hostInfo_prod import *
 from hostInfo_yoda import *
 #####################INPUTS################################################
-upperLimit = 40
+upperLimit = 100
 ###########################################################################
 
 db = MySQLdb.connect(host = host_,user = user_, passwd = password_, db = datebase_)
